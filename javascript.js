@@ -15,8 +15,13 @@ function drawGrid() {
     for (let i = 0; i < gridWidth * gridWidth; i++) {
         gridItem = document.createElement("div");
         gridItem.classList.toggle("grid-item");
+        gridItem.addEventListener("mouseenter", toggleHighlightedClass);
         grid.appendChild(gridItem);
     }
 
     grid.style.width = `${gridItem.offsetWidth * gridWidth}px`;
+}
+
+function toggleHighlightedClass(event) {
+    event.target.classList.add("highlighted");
 }

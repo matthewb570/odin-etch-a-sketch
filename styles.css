@@ -18,7 +18,10 @@ body {
 }
 
 .grid-item {
-    background-color: black;
     width: 10px;
     height: 10px;
+}
+
+.grid-item.highlighted {
+    background-color: black;
 }
