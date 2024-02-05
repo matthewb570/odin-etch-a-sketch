@@ -9,17 +9,22 @@ function setContainerSize() {
 
 function drawGrid() {
     const grid = document.querySelector(".grid");
+    const numGridItemsPerRow = 16;
 
-    const gridWidth = 16;
-    let gridItem;
-    for (let i = 0; i < gridWidth * gridWidth; i++) {
-        gridItem = document.createElement("div");
+    for (let i = 0; i < numGridItemsPerRow * numGridItemsPerRow; i++) {
+        
+        const gridItem = document.createElement("div");
+        
         gridItem.classList.toggle("grid-item");
+        
+        const gridItemWidthHeight = grid.clientWidth / numGridItemsPerRow;
+        gridItem.style.width = `${gridItemWidthHeight}px`
+        gridItem.style.height = `${gridItemWidthHeight}px`
+        
         gridItem.addEventListener("mouseenter", toggleHighlightedClass);
+        
         grid.appendChild(gridItem);
     }
-
-    grid.style.width = `${gridItem.offsetWidth * gridWidth}px`;
 }
 
 function toggleHighlightedClass(event) {

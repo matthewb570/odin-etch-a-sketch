@@ -15,11 +15,7 @@ body {
     border: solid;
     border-color: black;
     border-width: 2px;
-}
-
-.grid-item {
-    width: 10px;
-    height: 10px;
+    width: 1000px;
 }
 
 .grid-item.highlighted {
