@@ -6,6 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px 0px;
 }
 
 .grid {
@@ -15,9 +16,18 @@ body {
     border: solid;
     border-color: black;
     border-width: 2px;
-    width: 1000px;
+    width: 800px;
 }
 
 .grid-item.highlighted {
     background-color: black;
+}
+
+button {
+    font-weight: 800;
+    background-color: lightgreen;
+    border-color: lightgreen;
+    border-style: solid;
+    border-radius: 20px;
+    padding: 10px 20px;
 }

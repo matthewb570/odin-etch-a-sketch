@@ -1,15 +1,27 @@
-setContainerSize();
-drawGrid();
+const DEFAULT_NUM_GRID_ITEMS_PER_ROW = 16;
 
+setEventHandlers();
+drawGrid(DEFAULT_NUM_GRID_ITEMS_PER_ROW);
 
-function setContainerSize() {
-    const container = document.querySelector(".container");
-    container.style.height = `${window.innerHeight}px`;
+function adjustGridSize() {
+    let numGridItemsPerRow = prompt("Please enter a new number of pixels per "
+        + "row between 1 and 50:");
+
+    if (numGridItemsPerRow !== null) {
+        numGridItemsPerRow = Number(numGridItemsPerRow);
+        if (!Number.isInteger(numGridItemsPerRow) || numGridItemsPerRow < 1
+            || numGridItemsPerRow > 50) {
+            alert("Please enter an integer between 1 and 50.");
+        } else {
+            drawGrid(numGridItemsPerRow);
+        }
+    }
 }
 
-function drawGrid() {
+function drawGrid(numGridItemsPerRow) {
     const grid = document.querySelector(".grid");
-    const numGridItemsPerRow = 16;
+
+    removeAllChildren(grid);
 
     for (let i = 0; i < numGridItemsPerRow * numGridItemsPerRow; i++) {
         
@@ -29,4 +41,17 @@ function drawGrid() {
 
 function toggleHighlightedClass(event) {
     event.target.classList.add("highlighted");
+}
+
+function removeAllChildren(parentElement) {
+    let lastElement = parentElement.lastElementChild;
+    while(lastElement) {
+        parentElement.removeChild(lastElement);
+        lastElement = parentElement.lastElementChild;
+    }
+}
+
+function setEventHandlers() {
+    const btnAdjustGridSize = document.querySelector("#btnAdjustGridSize");
+    btnAdjustGridSize.addEventListener("click", adjustGridSize);
 }
