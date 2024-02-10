@@ -1,5 +1,7 @@
 const DEFAULT_NUM_GRID_ITEMS_PER_ROW = 16;
 
+let rainbowMode = false;
+
 setEventHandlers();
 drawGrid(DEFAULT_NUM_GRID_ITEMS_PER_ROW);
 
@@ -18,6 +20,13 @@ function adjustGridSize() {
     }
 }
 
+function toggleRainbowMode() {
+    const btnToggleRainbowMode = document.querySelector("#btnToggleRainbowMode");
+    
+    rainbowMode = !rainbowMode;
+    btnToggleRainbowMode.textContent = `Rainbow Mode: ${rainbowMode ? "On" : "Off"}`;
+}
+
 function drawGrid(numGridItemsPerRow) {
     const grid = document.querySelector(".grid");
 
@@ -33,14 +42,21 @@ function drawGrid(numGridItemsPerRow) {
         gridItem.style.width = `${gridItemWidthHeight}px`
         gridItem.style.height = `${gridItemWidthHeight}px`
         
-        gridItem.addEventListener("mouseenter", toggleHighlightedClass);
+        gridItem.addEventListener("mouseenter", setBackgroundColor);
         
         grid.appendChild(gridItem);
     }
 }
 
-function toggleHighlightedClass(event) {
-    event.target.classList.add("highlighted");
+function setBackgroundColor(event) {
+    if (rainbowMode) {
+        event.target.style.backgroundColor =
+            `rgb(${getRandomIntegerInRange(0, 255)}, ` +
+                `${getRandomIntegerInRange(0, 255)}, ` +
+                `${getRandomIntegerInRange(0, 255)})`;
+    } else {
+        event.target.style.backgroundColor = "black";
+    }
 }
 
 function removeAllChildren(parentElement) {
@@ -54,4 +70,14 @@ function removeAllChildren(parentElement) {
 function setEventHandlers() {
     const btnAdjustGridSize = document.querySelector("#btnAdjustGridSize");
     btnAdjustGridSize.addEventListener("click", adjustGridSize);
+
+    const btnToggleRainbowMode = document.querySelector("#btnToggleRainbowMode");
+    btnToggleRainbowMode.addEventListener("click", toggleRainbowMode);
+}
+
+/*
+    Returns a random integer between min (inclusive) and max (inclusive)
+*/
+function getRandomIntegerInRange(min, max) {
+    return Math.floor((Math.random() * (max - min + 1))) + min;
 }
